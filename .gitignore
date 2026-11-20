@@ -1,0 +1,11 @@
+.build/
+build/
+DerivedData/
+*.xcodeproj/
+xcuserdata/
+.swiftpm/
+*.ipa
+.DS_Store
+
+# 本机签名设置（Team ID、Bundle ID），见 Config/Signing.example.xcconfig
+Config/Signing.xcconfig

@@ -1,0 +1,30 @@
+# UI 测试工程：在 project.yml 基础上加 UI 测试 target 与 scheme。
+# 只用于模拟器测试（scripts/ui-test.sh），装到真机的工程不受影响
+include:
+  - project.yml
+
+targets:
+  EhViewerUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: AppUITests
+    dependencies:
+      - target: EhViewer
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: $(inherited).uitests
+        TEST_TARGET_NAME: EhViewer
+        SWIFT_VERSION: "5.0"
+
+schemes:
+  EhViewerUITests:
+    build:
+      targets:
+        EhViewer: all
+        EhViewerUITests: [test]
+    test:
+      config: Debug
+      targets:
+        - EhViewerUITests

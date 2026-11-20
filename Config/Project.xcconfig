@@ -1,0 +1,10 @@
+// 工程级构建设置（project.yml 的 configFiles 引用）。
+//
+// 签名安装用的 Team ID 与 Bundle ID 写在 Config/Signing.xcconfig 中：该文件不纳入版本控制，
+// 用 scripts/setup-signing.sh 生成，或复制 Signing.example.xcconfig 后修改（见 README）。
+
+// 默认值：模拟器与未签名构建用
+PRODUCT_BUNDLE_IDENTIFIER = com.example.ehviewer
+DEVELOPMENT_TEAM =
+
+#include? "Signing.xcconfig"

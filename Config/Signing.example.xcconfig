@@ -1,0 +1,9 @@
+// 签名设置模板：复制为 Config/Signing.xcconfig 后改成自己的值（或运行 scripts/setup-signing.sh 生成）。
+// Signing template: copy to Config/Signing.xcconfig and fill in your own values (or run scripts/setup-signing.sh).
+
+// Team ID：10 位大写字母与数字 / Your Team ID (10 characters)
+DEVELOPMENT_TEAM = ABCDE12345
+
+// Bundle ID（包名）：要全球唯一，确定后不要再改，否则会装成另一个 App、数据不互通
+// Bundle identifier: must be globally unique; keep it unchanged afterwards, or it installs as a different app
+PRODUCT_BUNDLE_IDENTIFIER = com.yourname.ehviewer

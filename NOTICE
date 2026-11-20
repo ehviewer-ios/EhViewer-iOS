@@ -1,0 +1,44 @@
+EhViewer for iOS
+Copyright (C) 2026 EhViewer for iOS contributors
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version. See the LICENSE file for the full text.
+
+This project is a Swift / SwiftUI port of Ehviewer_CN_SXJ
+(https://github.com/xiaojieonly/Ehviewer_CN_SXJ, Copyright (C) xiaojieonly and
+contributors), which is based on EhViewer by Hippo Seven
+(https://github.com/seven332/EhViewer). The business logic (HTML parsers, URL
+builders, the reader loader, download management, the .ehviewer file format,
+the database schema and the Wi-Fi transfer protocol) was translated from the
+Android source code into Swift; the user interface was rewritten for iOS.
+
+The original EhViewer source code is licensed under the Apache License,
+Version 2.0, and carries the following NOTICE:
+
+    EhViewer
+    Copyright 2014-2016 Hippo Seven
+
+    An Unofficial E-Hentai Application for Android.
+
+    香风智乃是最可爱的女孩子。
+    chino kafuu is the cutest girl.
+
+The app icon comes from EhViewer. The HTML test fixtures in
+EhKit/Tests/EhCoreTests/Fixtures are copied from the Ehviewer_CN_SXJ test
+resources.
+
+Chinese tag translations come from the EhTagTranslation project
+(https://github.com/EhTagTranslation/Database). The app downloads them at
+runtime from the tag-translations branch of https://github.com/Mapaler/EhViewer
+(the same source as the Android app); they are not part of this repository.
+
+Third-party libraries, fetched by Swift Package Manager when building (not
+included in this repository), all under the MIT License:
+    Nuke           https://github.com/kean/Nuke
+    GRDB.swift     https://github.com/groue/GRDB.swift
+    SwiftSoup      https://github.com/scinfu/SwiftSoup
+    ZIPFoundation  https://github.com/weichsel/ZIPFoundation
+
+EhViewer for iOS is not affiliated with E-Hentai.org.

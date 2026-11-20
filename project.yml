@@ -1,0 +1,81 @@
+name: EhViewer
+options:
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: zh-Hans
+  createIntermediateGroups: true
+  xcodeVersion: "26.0"
+
+# Team ID 与 Bundle ID 在 xcconfig 中设置（Config/Project.xcconfig，本机值见 Config/Signing.xcconfig），
+# 这里不要再写 DEVELOPMENT_TEAM / PRODUCT_BUNDLE_IDENTIFIER：工程中的设置优先于 xcconfig
+configFiles:
+  Debug: Config/Project.xcconfig
+  Release: Config/Project.xcconfig
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+
+packages:
+  EhKit:
+    path: EhKit
+  Nuke:
+    url: https://github.com/kean/Nuke.git
+    from: "12.8.0"
+
+targets:
+  EhViewer:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+    dependencies:
+      - package: EhKit
+        products: [EhCore, EhNetwork, EhStorage, EhSpider, EhTransfer]
+      - package: Nuke
+        products: [Nuke, NukeUI]
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: EhViewer
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSRequiresIPhoneOS: true
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          [UIInterfaceOrientationPortrait, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        UISupportedInterfaceOrientations~ipad:
+          [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        # 下载目录在“文件”App 中可见
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        UIBackgroundModes: [fetch, processing]
+        # 后台处理任务；持续处理任务（iOS 26+，后台继续下载）使用通配标识，且必须以 Bundle ID 开头
+        BGTaskSchedulerPermittedIdentifiers: [$(PRODUCT_BUNDLE_IDENTIFIER).download, $(PRODUCT_BUNDLE_IDENTIFIER).continuedDownload.*]
+        NSFaceIDUsageDescription: 用于解锁应用
+        NSCameraUsageDescription: 扫描二维码以连接另一台设备进行 Wi-Fi 传输
+        NSLocalNetworkUsageDescription: 在局域网内与其他设备互传下载内容
+        NSBonjourServices: [_ehviewer._tcp]
+        NSPhotoLibraryAddUsageDescription: 保存图片到相册
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+        CFBundleURLTypes:
+          - CFBundleURLName: $(PRODUCT_BUNDLE_IDENTIFIER)
+            CFBundleURLSchemes: [ehviewer]
+        CFBundleDocumentTypes:
+          - CFBundleTypeName: Archive
+            LSHandlerRank: Alternate
+            LSItemContentTypes: [public.zip-archive, com.pkware.zip-archive]
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        GENERATE_INFOPLIST_FILE: NO
