@@ -1,0 +1,2 @@
+# 解析器单元测试用的网页样本，不计入 GitHub 的语言统计（否则仓库会被识别为 HTML 项目）
+* linguist-detectable=false
